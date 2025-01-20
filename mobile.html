@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const images = document.querySelectorAll(".forecast-images-big img");
+            images.forEach(img => {
+                const originalSrc = img.src;
+                const uniqueQuery = `?t=${new Date().getTime()}`;
+                img.src = originalSrc + uniqueQuery;
+            });
+        });
+    </script>
+
+    <style>
+        body {
+            background-color: #0b1111;
+            margin: 0;
+            padding: 1px;
+            font-family: Arial, sans-serif;
+            width: 99%;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-around;
+            background-color: #0a4646;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .navbar .button {
+            background-color: #27a0a0;
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            text-decoration: none;
+            font-size: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .navbar .button:hover {
+            background-color: #a55050;
+        }
+
+        /* Container for images and content */
+        .content-container {
+            display: grid;
+            gap: 1px;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .forecast-images img {
+            cursor: pointer;
+            max-width: 30%;
+            margin: 2px;
+        }
+
+        .forecast-images-big img {
+            cursor: pointer;
+            height: 150;
+            max-width: 47%;
+            margin: 2px;
+        }
+
+        .full-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .full-screen img {
+            max-width: 90%;
+            max-height: 90%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Tide Charts */
+        .tides {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2px;
+            margin-top: 20px;
+        }
+
+        .tides img {
+            width: 48%;
+            height: 150px;
+            border-radius: 5px;
+        }
+
+        /* Sunset Widget */
+        .sunset {
+            text-align: center;
+            margin-top: 20px;
+            color: #fff;
+        }
+
+        /* Footer Section */
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #fff;
+        }
+
+        .station {
+            width: 98%;
+            object-fit: fill;
+            align-self: center;
+        }
+
+        .iframe-container {
+            height: 600;
+        }
+    </style>
+</head>
+<body>
+  
+    <!-- Navbar -->
+    <div class="navbar">
+      
+        <a href="https://portpascagoula.com/uploads/Daily.pdf" class="button" target="_blank">PORT SCHEDULE</a>
+        <a href="https://tidesandcurrents.noaa.gov/stationhome.html?id=8741533" class="button" target="_blank">STATION</a>
+        <a href="https://weather.cod.edu/satrad/nexrad/?parms=MOB-N0B-0-24-100-usa-ww" class="button" target="_blank">RADAR</a>
+    </div>
+
+
+    <!-- Content Container -->
+    <div class="content-container">
+        <!-- Weather Forecast Images -->
+        <div class="forecast-images">
+            <img src="https://www.wpc.ncep.noaa.gov/NationalForecastChart/staticmaps/noaad1.png" alt="Weather Map 1">
+            <img src="https://www.wpc.ncep.noaa.gov/NationalForecastChart/staticmaps/noaad2.png" alt="Weather Map 2">
+            <img src="https://www.wpc.ncep.noaa.gov/NationalForecastChart/staticmaps/noaad3.png" alt="Weather Map 3">
+
+            <img height="150" src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/gm/Sandwich/GOES16-GM-Sandwich-1000x1000.gif" alt="Weather Map 1">
+            <img height="150" src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/cam/Sandwich/GOES16-CAM-Sandwich-1000x1000.gif" alt="Weather Map 2">
+            <img height="150" src="https://cdn.star.nesdis.noaa.gov/GOES16/GLM/SECTOR/taw/EXTENT3/GOES16-TAW-EXTENT3-900x540.gif" alt="Weather Map 3">
+
+       
+       
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const forecastImages = document.querySelectorAll(".forecast-images img");
+                let fullScreenDiv = null;
+    
+                forecastImages.forEach(img => {
+                    img.addEventListener("click", () => {
+                        if (!fullScreenDiv) {
+                            fullScreenDiv = document.createElement("div");
+                            fullScreenDiv.classList.add("full-screen");
+    
+                            const fullScreenImg = document.createElement("img");
+                            fullScreenImg.src = img.src;
+                            fullScreenDiv.appendChild(fullScreenImg);
+    
+                            document.body.appendChild(fullScreenDiv);
+    
+                            fullScreenDiv.addEventListener("dblclick", () => {
+                                document.body.removeChild(fullScreenDiv);
+                                fullScreenDiv = null;
+                            });
+                        }
+                    });
+                });
+            });
+        </script>
+        </div>
+
+        <div class="content-container">
+            <!-- Weather Forecast Images -->
+            <div class="forecast-images-big">
+                    
+                <img height="100" width="48%" src="https://www.tideschart.com/tide-charts/en/Pascagoula-Mississippi-Sound-Jackson-County-Mississippi-United-States-tide-chart-30031638-ft.png" alt="Weather Map 1">
+    
+                <img height="100" width="48%" src="https://www.tideschart.com/tide-charts/en/Port-of-Pascagoula-Jackson-County-Mississippi-United-States-tide-chart-30014232-ft.png" alt="Weather Map 1">
+    
+                
+                <img height="100" width="48%" src="https://cdn.tidesandcurrents.noaa.gov/ports/plots/8741533_wl_24.png" alt="Weather Map 2">
+                <img height="100" width="458" src="https://cdn.tidesandcurrents.noaa.gov/ofs/ngofs2/wwwgraphics/NGOFS2_wind_peti_big.png" alt="Weather Map 3">
+            </div>
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    const forecastImages = document.querySelectorAll(".forecast-images-big img");
+                    let fullScreenDiv = null;
+        
+                    forecastImages.forEach(img => {
+                        img.addEventListener("click", () => {
+                            if (!fullScreenDiv) {
+                                fullScreenDiv = document.createElement("div");
+                                fullScreenDiv.classList.add("full-screen");
+        
+                                const fullScreenImg = document.createElement("img");
+                                fullScreenImg.src = img.src;
+                                fullScreenDiv.appendChild(fullScreenImg);
+        
+                                document.body.appendChild(fullScreenDiv);
+        
+                                fullScreenDiv.addEventListener("dblclick", () => {
+                                    document.body.removeChild(fullScreenDiv);
+                                    fullScreenDiv = null;
+                                });
+                            }
+                        });
+                    });
+                });
+            </script>
+  
+        <!-- Windy Map Iframes -->
+        <div class="iframe-container">
+       
+            <iframe height=50% src="https://embed.windy.com/embed.html?type=map&location=coordinates&metricRain=default&metricTemp=°F&metricWind=default&zoom=5&overlay=radar&product=radar&level=surface&lat=29.988&lon=-88.419&message=true"></iframe>
+    
+
+       
+    <script type="text/javascript">
+        // Map appearance
+        var width="95%";         // width in pixels or percentage
+        var height="100%";         // height in pixels
+        var latitude="30.24518";     // center latitude (decimal degrees)
+        var longitude="-88.5257";    // center longitude (decimal degrees)
+        var zoom="8";             // initial zoom (between 3 and 18)
+    </script>
+     <script type="text/javascript" src="https://www.vesselfinder.com/aismap.js"></script>
+        </div>
+
+      
+
+
+
+</body>
+</html>
