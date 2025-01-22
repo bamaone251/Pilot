@@ -30,7 +30,7 @@
             justify-content: space-around;
             background-color: #0a4646;
             padding: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 5px;
         }
 
         .navbar .button {
@@ -49,6 +49,8 @@
             background-color: #a55050;
         }
 
+
+        
         /* Container for images and content */
         .content-container {
             display: grid;
@@ -125,8 +127,39 @@
         }
 
         .iframe-container {
-            height: 600;
+            height: 60%;
         }
+
+        
+
+        .container {
+            display: flex;
+            gap: 20px;
+            padding-bottom: 5px;
+        }
+
+    .weather-card {
+      background-color: #6491af;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      width: 300px;
+      padding: 5px;
+      text-align: center;
+    }
+
+    .weather-card h1 {
+      margin: 0;
+      font-size: 14px;
+      color: #333333;
+    }
+
+    .weather-card p {
+      margin: 10px 0;
+      font-size: 12px;
+      color: #110d0d;
+    }
+
+        
     </style>
 </head>
 <body>
@@ -138,19 +171,108 @@
         <a href="https://tidesandcurrents.noaa.gov/stationhome.html?id=8741533" class="button" target="_blank">STATION</a>
         <a href="https://weather.cod.edu/satrad/nexrad/?parms=MOB-N0B-0-24-100-usa-ww" class="button" target="_blank">RADAR</a>
     </div>
+    <div class="container">
+        <!-- Weather Card -->
+        <div class="weather-card">
+          <h1></h1>
+          <p id="temperature">Loading temperature...</p>
+          <p id="wind-speed">Loading wind speed...</p>
+          <p id="wind-direction">Loading wind direction...</p>
+        </div>
+    
+        <!-- Sunrise/Sunset Card -->
+        <div class="weather-card">
+          <h1></h1>
+          <p id="sunrise">Loading sunrise time...</p>
+          <p id="sunset">Loading sunset time...</p>
+          <p id="visibility">Loading visibility...</p>
+        </div>
+      </div>
+    
+      <script>
+        async function fetchWeather() {
+          const apiKey = "a297944e4d9b86cbf522005337681cd9";
+          const latitude = 30.2027; // Latitude for Petit Bois, MS
+          const longitude = -88.4561; // Longitude for Petit Bois, MS
+          const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=imperial`;
+    
+          try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error("Failed to fetch weather data");
+    
+            const data = await response.json();
+    
+            // Extract weather data
+            const temperature = data.main.temp; // Current temperature
+            const windSpeed = data.wind.speed; // Wind speed
+            const windDirection = data.wind.deg; // Wind direction in degrees
+            const sunrise = new Date(data.sys.sunrise * 1000).toLocaleTimeString(); // Sunrise time
+            const sunset = new Date(data.sys.sunset * 1000).toLocaleTimeString(); // Sunset time
+            const visibility = (data.visibility / 1000).toFixed(1); // Visibility in kilometers
+    
+            // Convert wind direction to cardinal direction
+            const cardinalDirections = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
+            const directionIndex = Math.round(windDirection / 45) % 8;
+            const cardinalDirection = cardinalDirections[directionIndex];
+    
+            // Update weather card
+            document.getElementById("temperature").textContent = `Temperature: ${temperature}°F`;
+            document.getElementById("wind-speed").textContent = `Wind Speed: ${windSpeed} mph`;
+            document.getElementById("wind-direction").textContent = `Wind Direction: ${cardinalDirection}`;
+    
+            // Update sunrise/sunset card
+            document.getElementById("sunrise").textContent = `Sunrise: ${sunrise}`;
+            document.getElementById("sunset").textContent = `Sunset: ${sunset}`;
+            document.getElementById("visibility").textContent = `Visibility: ${visibility} km`;
+          } catch (error) {
+            document.getElementById("temperature").textContent = "Error fetching temperature";
+            document.getElementById("wind-speed").textContent = "Error fetching wind speed";
+            document.getElementById("wind-direction").textContent = "Error fetching wind direction";
+            document.getElementById("sunrise").textContent = "Error fetching sunrise time";
+            document.getElementById("sunset").textContent = "Error fetching sunset time";
+            document.getElementById("visibility").textContent = "Error fetching visibility";
+            console.error(error);
+          }
+        }
+    
+        fetchWeather();
+      </script>
 
+<script type="text/javascript">
+    // Map appearance
+    var width="95%";         // width in pixels or percentage
+    var height="100%";         // height in pixels
+    var latitude="30.24518";     // center latitude (decimal degrees)
+    var longitude="-88.5257";    // center longitude (decimal degrees)
+    var zoom="8";             // initial zoom (between 3 and 18)
+</script>
+ <script type="text/javascript" src="https://www.vesselfinder.com/aismap.js"></script>
 
+ <div class="content-container">
+    <!-- Weather Forecast Images -->
+    <div class="forecast-images-big">
+        
+        <img height="100" width="48%" src="https://cdn.tidesandcurrents.noaa.gov/ports/plots/8741533_wl_24.png" alt="Weather Map 2">
+        <img height="100" width="458" src="https://cdn.tidesandcurrents.noaa.gov/ofs/ngofs2/wwwgraphics/NGOFS2_wind_peti_big.png" alt="Weather Map 3">
+        
+        <img height="100" width="48%" src="https://www.tideschart.com/tide-charts/en/Pascagoula-Mississippi-Sound-Jackson-County-Mississippi-United-States-tide-chart-30031638-ft.png" alt="Weather Map 1">
+
+        <img height="100" width="48%" src="https://www.tideschart.com/tide-charts/en/Port-of-Pascagoula-Jackson-County-Mississippi-United-States-tide-chart-30014232-ft.png" alt="Weather Map 1">
+
+        
+       
+    </div>
     <!-- Content Container -->
     <div class="content-container">
         <!-- Weather Forecast Images -->
         <div class="forecast-images">
-            <img src="https://www.wpc.ncep.noaa.gov/NationalForecastChart/staticmaps/noaad1.png" alt="Weather Map 1">
-            <img src="https://www.wpc.ncep.noaa.gov/NationalForecastChart/staticmaps/noaad2.png" alt="Weather Map 2">
-            <img src="https://www.wpc.ncep.noaa.gov/NationalForecastChart/staticmaps/noaad3.png" alt="Weather Map 3">
+            <img height="150" src="https://www.wpc.ncep.noaa.gov/NationalForecastChart/staticmaps/noaad1.png" alt="Weather Map 1">
+            <img height="150" src="https://www.wpc.ncep.noaa.gov/NationalForecastChart/staticmaps/noaad2.png" alt="Weather Map 2">
+            <img height="150" src="https://www.wpc.ncep.noaa.gov/NationalForecastChart/staticmaps/noaad3.png" alt="Weather Map 3">
 
-            <img height="150" src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/gm/Sandwich/GOES16-GM-Sandwich-1000x1000.gif" alt="Weather Map 1">
-            <img height="150" src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/cam/Sandwich/GOES16-CAM-Sandwich-1000x1000.gif" alt="Weather Map 2">
-            <img height="150" src="https://cdn.star.nesdis.noaa.gov/GOES16/GLM/SECTOR/taw/EXTENT3/GOES16-TAW-EXTENT3-900x540.gif" alt="Weather Map 3">
+            <img height="150" width="30%" src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/gm/Sandwich/GOES16-GM-Sandwich-1000x1000.gif" alt="Weather Map 1">
+            <img height="150" width="30%" src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/cam/Sandwich/GOES16-CAM-Sandwich-1000x1000.gif" alt="Weather Map 2">
+            <img height="150" width="30%" src="https://cdn.star.nesdis.noaa.gov/GOES16/GLM/SECTOR/taw/EXTENT3/GOES16-TAW-EXTENT3-900x540.gif" alt="Weather Map 3">
 
        
        
@@ -182,18 +304,9 @@
         </script>
         </div>
 
-        <div class="content-container">
-            <!-- Weather Forecast Images -->
-            <div class="forecast-images-big">
-                    
-                <img height="100" width="48%" src="https://www.tideschart.com/tide-charts/en/Pascagoula-Mississippi-Sound-Jackson-County-Mississippi-United-States-tide-chart-30031638-ft.png" alt="Weather Map 1">
-    
-                <img height="100" width="48%" src="https://www.tideschart.com/tide-charts/en/Port-of-Pascagoula-Jackson-County-Mississippi-United-States-tide-chart-30014232-ft.png" alt="Weather Map 1">
-    
-                
-                <img height="100" width="48%" src="https://cdn.tidesandcurrents.noaa.gov/ports/plots/8741533_wl_24.png" alt="Weather Map 2">
-                <img height="100" width="458" src="https://cdn.tidesandcurrents.noaa.gov/ofs/ngofs2/wwwgraphics/NGOFS2_wind_peti_big.png" alt="Weather Map 3">
-            </div>
+       
+
+     
             <script>
                 document.addEventListener("DOMContentLoaded", function () {
                     const forecastImages = document.querySelectorAll(".forecast-images-big img");
@@ -224,19 +337,11 @@
         <!-- Windy Map Iframes -->
         <div class="iframe-container">
        
-            <iframe height=50% src="https://embed.windy.com/embed.html?type=map&location=coordinates&metricRain=default&metricTemp=°F&metricWind=default&zoom=5&overlay=radar&product=radar&level=surface&lat=29.988&lon=-88.419&message=true"></iframe>
+            <iframe height="300px" src="https://embed.windy.com/embed.html?type=map&location=coordinates&metricRain=default&metricTemp=°F&metricWind=default&zoom=5&overlay=radar&product=radar&level=surface&lat=29.988&lon=-88.419&message=true"></iframe>
     
 
        
-    <script type="text/javascript">
-        // Map appearance
-        var width="95%";         // width in pixels or percentage
-        var height="100%";         // height in pixels
-        var latitude="30.24518";     // center latitude (decimal degrees)
-        var longitude="-88.5257";    // center longitude (decimal degrees)
-        var zoom="8";             // initial zoom (between 3 and 18)
-    </script>
-     <script type="text/javascript" src="https://www.vesselfinder.com/aismap.js"></script>
+ 
         </div>
 
       
