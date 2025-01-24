@@ -17,290 +17,274 @@
         });
     </script>
 
-<style>
-    body {
-        background-color: #0b1111;
-        margin: 0;
-        padding: 1px;
-        font-family: Arial, sans-serif;
-        width: 99%;
-        justify-self: center;
+    <style>
+        body {
+            background-color: #0b1111;
+            margin: 0;
+            padding: 1px;
+            font-family: Arial, sans-serif;
+            width: 99%;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-around;
+            background-color: #0a4646;
+            padding: 10px;
+            margin-bottom: 5px;
+        }
+
+        .navbar .button {
+            background-color: #27a0a0;
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            text-decoration: none;
+            font-size: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .navbar .button:hover {
+            background-color: #a55050;
+        }
+
+
+        
+        /* Container for images and content */
+        .content-container {
+            display: grid;
+            gap: 1px;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .forecast-images img {
+            cursor: pointer;
+            max-width: 30%;
+            margin: 2px;
+        }
+
+        .forecast-images-big img {
+            cursor: pointer;
+            height: 150;
+            max-width: 47%;
+            margin: 2px;
+        }
+
+        .full-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .full-screen img {
+            max-width: 90%;
+            max-height: 90%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Tide Charts */
+        .tides {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2px;
+            margin-top: 20px;
+        }
+
+        .tides img {
+            width: 48%;
+            height: 150px;
+            border-radius: 5px;
+        }
+
+        /* Sunset Widget */
+        .sunset {
+            text-align: center;
+            margin-top: 20px;
+            color: #fff;
+        }
+
+        /* Footer Section */
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #fff;
+        }
+
+        .station {
+            width: 98%;
+            object-fit: fill;
+            align-self: center;
+        }
+
+        .iframe-container {
+            height: 60%;
+        }
+
+        
+
+        .container {
+            display: flex;
+            gap: 10px;
+            padding-bottom: 5px;
+            padding-left: 0px;
+            padding-right: 5px;
+            justify-content: center;
+        }
+
+    .weather-card {
+      background-color: #6491af;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      width: 40%;
+      padding: 5px;
+      text-align: center;
     }
 
-    /* Navbar */
-    .navbar {
-        display: flex;
-        justify-content: space-around;
-        background-color: #0a4646;
-        padding: 10px;
-        margin-bottom: 5px;
+    .weather-card h1 {
+      margin: 0;
+      font-size: 14px;
+      color: #333333;
     }
 
-    .navbar .button {
-        background-color: #27a0a0;
-        color: #fff;
-        border: none;
-        padding: 8px 12px;
-        text-decoration: none;
-        font-size: 10px;
-        border-radius: 5px;
-        cursor: pointer;
-        text-align: center;
+    .weather-card p {
+      margin: 10px 0;
+      font-size: 12px;
+      color: #110d0d;
     }
 
-    .navbar .button:hover {
-        background-color: #a55050;
-    }
-
-
-    
-    /* Container for images and content */
-    .content-container {
-        display: grid;
-        grid-row: 2 1fr;
-        gap: 1px;
-        justify-content: center;
-        overflow: hidden;
-    }
-
-    
-
-    .forecast-images img {
-        cursor: pointer;
-        padding-left: 2px;
-        max-width: 47%;
-        max-height: 35%;
-        margin: 2px;
-        justify-content: center;
-    }
-
-    .forecast-images-big img {
-        cursor: pointer;
-        height: 350;
-        max-width: 42%;
-        min-height: 200px;
-        max-height: 35%;
-        margin: 1px;
-        justify-content: center;
-    }
-
-    .full-screen {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.8);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 1000;
-    }
-
-    .full-screen img {
-        max-width: 90%;
-        max-height: 90%;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-    }
-
-    /* Tide Charts */
-    .tides {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 2px;
-        margin-top: 20px;
-    }
-
-    .tides img {
-        width: 48%;
-        height: 150px;
-        border-radius: 5px;
-    }
-
-    /* Sunset Widget */
-    .sunset {
-        text-align: center;
-        margin-top: 20px;
-        color: #fff;
-    }
-
-    /* Footer Section */
-    .footer {
-        text-align: center;
-        margin-top: 30px;
-        color: #fff;
-    }
-
-    .station {
-        width: 98%;
-        object-fit: fill;
-        align-self: center;
-    }
-
-    .iframe-container {
-        height: 60%;
-    }
-
-    
-
-    .container {
-        display: flex;
-        gap: 10px;
-        padding-bottom: 5px;
-        padding-left: 0px;
-        padding-right: 5px;
-        justify-content: center;
-    }
-
-.weather-card {
-  background-color: #0b2638;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  width: 40%;
-  padding: 5px;
-  text-align: center;
-}
-
-.weather-card h1 {
-  margin: 0;
-  font-size: 14px;
-  font-weight: bold;
-  color: #333333;
-}
-
-.weather-card p {
-  margin: 10px 0;
-  font-size: 14px;
-  color: #fdfcfc;
-}
-
-    
-</style>
+        
+    </style>
 </head>
 <body>
   
     <!-- Navbar -->
     <div class="navbar">
       
-        <a href="ROCKIES.html" class="button" target="_blank">MTN</a>
-        <a href="EUS.html" class="button" target="_blank">EAST</a>
-        <a href="GREATLAKES.html" class="button" target="_blank">LAKES</a>
-        <a href="NE.html" class="button" target="_blank">NE</a>
-        <a href="https://internetvail.com/FYC/index.php?theme=dark&lang=en-us&units=us" class="button" target="_blank">Wx</a>
+        <a href="https://portpascagoula.com/uploads/Daily.pdf" class="button" target="_blank">PORT SCHEDULE</a>
+        <a href="https://tidesandcurrents.noaa.gov/stationhome.html?id=8741533" class="button" target="_blank">STATION</a>
         <a href="https://weather.cod.edu/satrad/nexrad/?parms=MOB-N0B-0-24-100-usa-ww" class="button" target="_blank">RADAR</a>
     </div>
-
-         <div class="adsb">
-
-            <script type="text/javascript">
-                // Map appearance
-                var width="96%";         // width in pixels or percentage
-                var height="200";         // height in pixels
-                var latitude="30.24518";     // center latitude (decimal degrees)
-                var longitude="-88.5257";    // center longitude (decimal degrees)
-                var zoom="9";             // initial zoom (between 3 and 18)
-            </script>
-     
-            <script  type="text/javascript" src="https://www.vesselfinder.com/aismap.js"></script>
-
-            <iframe width="96%" height="250"  src="https://globe.adsbexchange.com/" frameborder="0"></iframe>
+    <div class="container">
+        <!-- Weather Card -->
+        <div class="weather-card">
+          <h1></h1>
+          <p id="temperature">Loading temperature...</p>
+          <p id="wind-speed">Loading wind speed...</p>
+          <p id="wind-direction">Loading wind direction...</p>
         </div>
-                <!-- Content Container -->
-                <div class="content-container">
-                    <!-- Weather Forecast Images -->
-                    <div class="forecast-images">
-      
+    
+        <!-- Sunrise/Sunset Card -->
+        <div class="weather-card">
+          <h1></h1>
+          <p id="sunrise">Loading sunrise time...</p>
+          <p id="sunset">Loading sunset time...</p>
+          <p id="visibility">Loading visibility...</p>
+        </div>
+      </div>
+    
+      <script>
+        async function fetchWeather() {
+          const apiKey = "a297944e4d9b86cbf522005337681cd9";
+          const latitude = 30.2027; // Latitude for Petit Bois, MS
+          const longitude = -88.4561; // Longitude for Petit Bois, MS
+          const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=imperial`;
+    
+          try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error("Failed to fetch weather data");
+    
+            const data = await response.json();
+    
+            // Extract weather data
+            const temperature = data.main.temp; // Current temperature
+            const windSpeed = data.wind.speed; // Wind speed
+            const windDirection = data.wind.deg; // Wind direction in degrees
+            const sunrise = new Date(data.sys.sunrise * 1000).toLocaleTimeString(); // Sunrise time
+            const sunset = new Date(data.sys.sunset * 1000).toLocaleTimeString(); // Sunset time
+            const visibility = (data.visibility / 1000).toFixed(1); // Visibility in kilometers
+    
+            // Convert wind direction to cardinal direction
+            const cardinalDirections = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
+            const directionIndex = Math.round(windDirection / 45) % 8;
+            const cardinalDirection = cardinalDirections[directionIndex];
+    
+            // Update weather card
+            document.getElementById("temperature").textContent = `Temperature: ${temperature}°F`;
+            document.getElementById("wind-speed").textContent = `Wind Speed: ${windSpeed} mph`;
+            document.getElementById("wind-direction").textContent = `Wind Direction: ${cardinalDirection}`;
+    
+            // Update sunrise/sunset card
+            document.getElementById("sunrise").textContent = `Sunrise: ${sunrise}`;
+            document.getElementById("sunset").textContent = `Sunset: ${sunset}`;
+            document.getElementById("visibility").textContent = `Visibility: ${visibility} km`;
+          } catch (error) {
+            document.getElementById("temperature").textContent = "Error fetching temperature";
+            document.getElementById("wind-speed").textContent = "Error fetching wind speed";
+            document.getElementById("wind-direction").textContent = "Error fetching wind direction";
+            document.getElementById("sunrise").textContent = "Error fetching sunrise time";
+            document.getElementById("sunset").textContent = "Error fetching sunset time";
+            document.getElementById("visibility").textContent = "Error fetching visibility";
+            console.error(error);
+          }
+        }
+    
+        fetchWeather();
+      </script>
 
-            <img    src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/gm/Sandwich/GOES16-GM-Sandwich-1000x1000.gif" alt="Weather Map 1">
-            <img    src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/cam/Sandwich/GOES16-CAM-Sandwich-1000x1000.gif" alt="Weather Map 2">
-            <img    src="https://cdn.star.nesdis.noaa.gov/GOES16/GLM/SECTOR/taw/EXTENT3/GOES16-TAW-EXTENT3-900x540.gif" alt="Weather Map 3">
+<script type="text/javascript">
+    // Map appearance
+    var width="95%";         // width in pixels or percentage
+    var height="100%";         // height in pixels
+    var latitude="30.24518";     // center latitude (decimal degrees)
+    var longitude="-88.5257";    // center longitude (decimal degrees)
+    var zoom="8";             // initial zoom (between 3 and 18)
+</script>
 
-            <img   src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/gm/AirMass/GOES16-GM-AirMass-1000x1000.gif" alt="Weather Map 1">
-            <img   src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/gm/08/GOES16-GM-08-1000x1000.gif">
-            <img   src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/gm/13/GOES16-GM-13-1000x1000.gif" alt="Weather Map 3">
+ <script type="text/javascript" src="https://www.vesselfinder.com/aismap.js"></script>
 
+ <div class="content-container">
+    <!-- Weather Forecast Images -->
+    <div class="forecast-images-big">
+        
+        <img height="100" width="48%" src="https://cdn.tidesandcurrents.noaa.gov/ports/plots/8741533_wl_24.png" alt="Weather Map 2">
+        <img height="100" width="458" src="https://cdn.tidesandcurrents.noaa.gov/ofs/ngofs2/wwwgraphics/NGOFS2_wind_peti_big.png" alt="Weather Map 3">
+        
+        <img height="100" width="48%" src="https://www.tideschart.com/tide-charts/en/Pascagoula-Mississippi-Sound-Jackson-County-Mississippi-United-States-tide-chart-30031638-ft.png" alt="Weather Map 1">
+
+        <img height="100" width="48%" src="https://www.tideschart.com/tide-charts/en/Port-of-Pascagoula-Jackson-County-Mississippi-United-States-tide-chart-30014232-ft.png" alt="Weather Map 1">
+
+        
+       
+    </div>
+    <!-- Content Container -->
+    <div class="content-container">
+        <!-- Weather Forecast Images -->
+        <div class="forecast-images">
+            <img height="150" src="https://www.wpc.ncep.noaa.gov/NationalForecastChart/staticmaps/noaad1.png" alt="Weather Map 1">
+            <img height="150" src="https://www.wpc.ncep.noaa.gov/NationalForecastChart/staticmaps/noaad2.png" alt="Weather Map 2">
+            <img height="150" src="https://www.wpc.ncep.noaa.gov/NationalForecastChart/staticmaps/noaad3.png" alt="Weather Map 3">
+
+            <img height="150" width="30%" src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/gm/Sandwich/GOES16-GM-Sandwich-1000x1000.gif" alt="Weather Map 1">
+            <img height="150" width="30%" src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/cam/Sandwich/GOES16-CAM-Sandwich-1000x1000.gif" alt="Weather Map 2">
+            <img height="150" width="30%" src="https://cdn.star.nesdis.noaa.gov/GOES16/GLM/SECTOR/taw/EXTENT3/GOES16-TAW-EXTENT3-900x540.gif" alt="Weather Map 3">
 
        
-            <img   src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/cam/Sandwich/GOES16-CAM-Sandwich-1000x1000.gif">
-            <img   src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/cam/GEOCOLOR/GOES16-CAM-GEOCOLOR-1000x1000.gif">
-            <img   src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/cam/DayNightCloudMicroCombo/GOES16-CAM-DayNightCloudMicroCombo-1000x1000.gif" alt="Weather Map 3">
-
-            <img   src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/eus/Sandwich/GOES16-EUS-Sandwich-1000x1000.gif">
-            <img   src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/eus/08/GOES16-EUS-08-1000x1000.gif">
-           
-            <img   src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/cam/DayNightCloudMicroCombo/GOES16-CAM-DayNightCloudMicroCombo-1000x1000.gif" alt="Weather Map 3">
-
-            <img   src="https://ocean.weather.gov/UA/Mexico.gif" alt="Weather Map 1">
-            <img   src="https://ocean.weather.gov/Loops/NCOM/currents/Ncomcurrents_GMexHR_f000.png" alt="Weather Map 2">
-            <img   src="https://www.ncei.noaa.gov/jag/navy/data/satellite_analysis/gsscofa.gif" alt="Weather Map 3">
-            
-            <img   src="https://www.weather.gov/images//mob/graphicast/image_full21.png" alt="Weather Map 1">
-            <img   src="https://www.wpc.ncep.noaa.gov/basicwx/94fndfd.gif" alt="Weather Map 2">
-            <img   src="https://www.wpc.ncep.noaa.gov/medr/display/wpcwx+frontsf072.gif" alt="Weather Map 3">
+            <img height="150" width="30%" src="https://ocean.weather.gov/UA/Mexico.gif" alt="Weather Map 1">
+            <img height="150" width="30%" src="https://ocean.weather.gov/Loops/NCOM/currents/Ncomcurrents_GMexHR_f000.png" alt="Weather Map 2">
+            <img height="150" width="30%" src="https://www.ncei.noaa.gov/jag/navy/data/satellite_analysis/gsscofa.gif?id=88191" alt="Weather Map 3">
        
-
-            <img   src="https://cdn.star.nesdis.noaa.gov/GOES16/SUVI/FD/Fe171/latest.jpg" alt="Weather Map 1">
-            <img   src="https://cdn.star.nesdis.noaa.gov/GOES16/SUVI/FD/He303/latest.jpg">
-            <img   src="https://www.heavens-above.com/orbitdisplay.aspx?icon=iss&width=600&height=300&mode=M&satid=25544" alt="Weather Map 3">
-
-
-            <img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/eus/Sandwich/GOES16-EUS-Sandwich-1000x1000.gif">
-
-            <img  src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/eus/GEOCOLOR/GOES16-EUS-GEOCOLOR-1000x1000.gif">
-
-            <img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/eus/FireTemperature/GOES16-EUS-FireTemperature-1000x1000.gif">
-
-            <img   src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/eus/DayNightCloudMicroCombo/GOES16-EUS-DayNightCloudMicroCombo-1000x1000.gif">
-
-            <img   src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/eus/AirMass/GOES16-EUS-AirMass-1000x1000.gif ">
-
-            <img   src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/eus/14/GOES16-EUS-14-1000x1000.gif" alt="Weather Map 3">
-
-
-       
-            <img   src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/eus/08/GOES16-EUS-08-1000x1000.gif">
-
-            <img   src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/eus/07/GOES16-EUS-07-1000x1000.gif">
-
-            <img   src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/eus/02/GOES16-EUS-02-1000x1000.gif" alt="Weather Map 3">
-
-            <img   src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/eus/Sandwich/GOES16-EUS-Sandwich-1000x1000.gif">
-
-            <img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/cgl/02/GOES16-CGL-02-600x600.gif">
-            <img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/cgl/07/GOES16-CGL-07-600x600.gif">
-            <img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/cgl/08/GOES16-CGL-08-600x600.gif">
-            <img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/cgl/13/GOES16-CGL-13-600x600.gif">
-            <img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/cgl/14/GOES16-CGL-14-600x600.gif">
-            <img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/cgl/AirMass/GOES16-CGL-AirMass-600x600.gif">
-            <img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/cgl/DayNightCloudMicroCombo/GOES16-CGL-DayNightCloudMicroCombo-600x600.gif">
-            <img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/cgl/FireTemperature/GOES16-CGL-FireTemperature-600x600.gif">
-            <img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/cgl/GEOCOLOR/GOES16-CGL-GEOCOLOR-600x600.gif">
-            <img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/cgl/Sandwich/GOES16-CGL-Sandwich-600x600.gif">
-            
-            <img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/ne/02/GOES16-NE-02-600x600.gif">
-            <img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/ne/07/GOES16-NE-07-600x600.gif">
-            <img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/ne/08/GOES16-NE-08-600x600.gif">
-            <img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/ne/13/GOES16-NE-13-600x600.gif">
-            <img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/ne/14/GOES16-NE-14-600x600.gif">
-            <img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/ne/AirMass/GOES16-NE-AirMass-600x600.gif">
-            <img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/ne/DayNightCloudMicroCombo/GOES16-NE-DayNightCloudMicroCombo-600x600.gif">
-            <img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/ne/FireTemperature/GOES16-NE-FireTemperature-600x600.gif">
-            <img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/ne/GEOCOLOR/GOES16-NE-GEOCOLOR-600x600.gif">
-            <img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/ne/Sandwich/GOES16-NE-Sandwich-600x600.gif">
-
-            <img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/nr/02/GOES16-NR-02-600x600.gif">
-            <img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/nr/07/GOES16-NR-07-600x600.gif">
-            <img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/nr/08/GOES16-NR-08-600x600.gif">
-            <img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/nr/13/GOES16-NR-13-600x600.gif">
-            <img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/nr/14/GOES16-NR-14-600x600.gif">
-            <img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/nr/AirMass/GOES16-NR-AirMass-600x600.gif">
-            <img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/nr/DayNightCloudMicroCombo/GOES16-NR-DayNightCloudMicroCombo-600x600.gif">
-            <img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/nr/FireTemperature/GOES16-NR-FireTemperature-600x600.gif">
-            <img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/nr/GEOCOLOR/GOES16-NR-GEOCOLOR-600x600.gif">
-            <img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/nr/Sandwich/GOES16-NR-Sandwich-600x600.gif">
-
-
         <script>
             document.addEventListener("DOMContentLoaded", function () {
                 const forecastImages = document.querySelectorAll(".forecast-images img");
@@ -370,7 +354,20 @@
         </div>
 
       
-
+        <script>
+            if ("serviceWorker" in navigator) {
+              window.addEventListener("load", () => {
+                navigator.serviceWorker.register("./service-worker.js")
+                  .then(registration => {
+                    console.log("ServiceWorker registered: ", registration);
+                  })
+                  .catch(error => {
+                    console.error("ServiceWorker registration failed: ", error);
+                  });
+              });
+            }
+          </script>
+          
 
 
 </body>
