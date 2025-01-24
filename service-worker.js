@@ -2,6 +2,10 @@ const CACHE_NAME = "weather-dashboard-cache-v1";
 const urlsToCache = [
     "./",
     "./index.html",
+    "./EUS.html",
+    "./GREATLAKES.html",
+    "./NE.html",
+    "./ROCKIES.html",
     "./style.css",
     "./script.js",
     "./manifest.json"
