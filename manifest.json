@@ -1,6 +1,6 @@
 {
-  "name": "Weather Dashboard",
-  "short_name": "Weather",
+  "name": "Port of Pascagoula",
+  "short_name": "Goula",
   "description": "A weather dashboard showcasing weather maps and related information.",
   "start_url": "./index.html",
   "display": "standalone",
