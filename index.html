@@ -180,72 +180,7 @@
         <a href="https://tidesandcurrents.noaa.gov/ports/textscreen.shtml?port=ps" class="button" target="_blank">STATION</a>
         <a href="https://weather.cod.edu/satrad/nexrad/?parms=MOB-N0B-0-24-100-usa-ww" class="button" target="_blank">RADAR</a>
     </div>
-    <div class="container">
-        <!-- Weather Card -->
-        <div class="weather-card">
-          <h1></h1>
-          <p id="temperature">Loading temperature...</p>
-          <p id="wind-speed">Loading wind speed...</p>
-          <p id="wind-direction">Loading wind direction...</p>
-        </div>
-    
-        <!-- Sunrise/Sunset Card -->
-        <div class="weather-card">
-          <h1></h1>
-          <p id="sunrise">Loading sunrise time...</p>
-          <p id="sunset">Loading sunset time...</p>
-          <p id="visibility">Loading visibility...</p>
-        </div>
-      </div>
-    
-      <script>
-        async function fetchWeather() {
-          const apiKey = "a297944e4d9b86cbf522005337681cd9";
-          const latitude = 30.2027; // Latitude for Petit Bois, MS
-          const longitude = -88.4561; // Longitude for Petit Bois, MS
-          const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=imperial`;
-    
-          try {
-            const response = await fetch(url);
-            if (!response.ok) throw new Error("Failed to fetch weather data");
-    
-            const data = await response.json();
-    
-            // Extract weather data
-            const temperature = data.main.temp; // Current temperature
-            const windSpeed = data.wind.speed; // Wind speed
-            const windDirection = data.wind.deg; // Wind direction in degrees
-            const sunrise = new Date(data.sys.sunrise * 1000).toLocaleTimeString(); // Sunrise time
-            const sunset = new Date(data.sys.sunset * 1000).toLocaleTimeString(); // Sunset time
-            const visibility = (data.visibility / 1000).toFixed(1); // Visibility in kilometers
-    
-            // Convert wind direction to cardinal direction
-            const cardinalDirections = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
-            const directionIndex = Math.round(windDirection / 45) % 8;
-            const cardinalDirection = cardinalDirections[directionIndex];
-    
-            // Update weather card
-            document.getElementById("temperature").textContent = `Temperature: ${temperature}°F`;
-            document.getElementById("wind-speed").textContent = `Wind Speed: ${windSpeed} mph`;
-            document.getElementById("wind-direction").textContent = `Wind Direction: ${cardinalDirection}`;
-    
-            // Update sunrise/sunset card
-            document.getElementById("sunrise").textContent = `Sunrise: ${sunrise}`;
-            document.getElementById("sunset").textContent = `Sunset: ${sunset}`;
-            document.getElementById("visibility").textContent = `Visibility: ${visibility} km`;
-          } catch (error) {
-            document.getElementById("temperature").textContent = "Error fetching temperature";
-            document.getElementById("wind-speed").textContent = "Error fetching wind speed";
-            document.getElementById("wind-direction").textContent = "Error fetching wind direction";
-            document.getElementById("sunrise").textContent = "Error fetching sunrise time";
-            document.getElementById("sunset").textContent = "Error fetching sunset time";
-            document.getElementById("visibility").textContent = "Error fetching visibility";
-            console.error(error);
-          }
-        }
-    
-        fetchWeather();
-      </script>
+   
 <li></li>
 <script type="text/javascript">
     // Map appearance
@@ -389,6 +324,7 @@
 
 </body>
 </html>
+
 
 
 
